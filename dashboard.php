@@ -51,7 +51,9 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
             <div class="subheaderbox">
                 <div class="lsubheader">
                     <h1>Bon appétit,</h1>
-                    <h1 class="fname">Jundi</h1>
+                    <h1 class="fname">
+                        <?php echo $fname; ?>
+                    </h1>
 
                 </div>
                 <div class="rsubheader">
@@ -98,17 +100,26 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
                         <img src="<?= $row['Gambar']; ?>">
                     </div>
                 </div>
-                <div class="menutitle">
-                    <h4><?= $row['NamaMenu']; ?></h4>
+
+                <div class="menuinfo">
+                    <div class="menutitle">
+                        <h4>
+                            <?= $row['NamaMenu']; ?>
+                        </h4>
+                    </div>
+                    <div class="menudesc">
+                        <?= $row['Deskripsi']; ?>
+                    </div>
+                    <div class="menuprice">Rp.
+                        <?= $row['Harga']; ?>
+                    </div>
+                    <div class="menuadd">Add</div>
                 </div>
-                <div class="menudesc"><?= $row['Deskripsi']; ?></div>
-                <div class="menuprice">Rp.<?= $row['Harga']; ?></div>
-                <div class="menuadd">Add</div>
 
             </div>
             <?php endwhile; ?>
 
-            
+
         </div>
         <div class="footer"></div>
     </div>

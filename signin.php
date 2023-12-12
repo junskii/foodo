@@ -1,3 +1,7 @@
+<?
+session_start();
+include 'koneksi.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +42,7 @@
                     </label>
                 </div>
                 <br><br>
-                <input type="submit" value="Login" id="loginbutton">
+                <button id="loginbutton" name="submit" type="submit">Login</button>
             </form>
             <div class="signuparea">
                 <p class="daftarakun">Don't have an account yet?<a href="regist.php"> Click here!</a></p>

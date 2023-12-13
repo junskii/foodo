@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="increment.css">
+
+</head>
+
+<body>
+    <div class="form-group">
+        <label>Quantity: </label>
+        <div class="addbutton">
+            <div class="input-group-btn">
+                <button id="down" class="lbtn btn-default" onclick=" down('0')"><span
+                        class="glyphicon glyphicon-minus"></span>-</button>
+            </div>
+            <input type="text" id="myNumber" class="form-control input-number" value="1" />
+            <div class="input-group-btn">
+                <button id="up" class="rbtn btn-default" onclick="up('10')"><span
+                        class="glyphicon glyphicon-plus"></span>+</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+      <!-- <div class="input-group">
+        <button id="decrement">-</button>
+        <input type="number" id="input" value="0" readonly>
+        <button id="increment">+</button>
+      </div> -->
+
+    <script>
+        function up(max) {
+            document.getElementById("myNumber").value = parseInt(document.getElementById("myNumber").value) + 1;
+            if (document.getElementById("myNumber").value >= parseInt(max)) {
+                document.getElementById("myNumber").value = max;
+            }
+        }
+        function down(min) {
+            document.getElementById("myNumber").value = parseInt(document.getElementById("myNumber").value) - 1;
+            if (document.getElementById("myNumber").value <= parseInt(min)) {
+                document.getElementById("myNumber").value = min;
+            }
+        }
+
+        let counter = 0;
+
+function increment() {
+  counter++;
+}
+
+function decrement() {
+  counter--;
+}
+
+function get() {
+  return counter;
+}
+
+const inc = document.getElementById("increment");
+const input = document.getElementById("input");
+const dec = document.getElementById("decrement");
+
+inc.addEventListener("click", () => {
+  increment();
+  input.value = get();
+});
+
+dec.addEventListener("click", () => {
+  if (input.value > 0) {
+    decrement();
+  }
+  input.value = get();
+});
+
+    </script>
+</body>
+
+</html>

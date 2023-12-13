@@ -8,7 +8,7 @@ body {
 .container {
     width: 100%;
     display: grid;
-    grid-template-columns: 0.2fr 1fr;
+    grid-template-columns: 1fr auto;
     grid-template-rows: repeat(5 1fr);
     grid-template-areas:
         'header header'
@@ -16,6 +16,9 @@ body {
         'nav main'
         'nav main'
         'nav main';
+
+    width: 100%;
+    height: 100vh;
 }
 
 .header {
@@ -104,33 +107,30 @@ button {
 
 /*--------------------nav--------------------*/
 .navbar {
-    /* position: sticky;
-    top: 0vw; */
     grid-area: nav;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-rows: 3fr 1fr;
     grid-template-areas:
         'navbar-top'
         'navbar-bot';
 
     border-right: 2px solid #D9D9D9;
+    width: 20vw;
+    height: 100%;
 }
 
 .navbar .top {
     grid-area: navbar-top;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 
 }
 
 .navbar .top .box {
-    /* display: flex; */
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin: 20px 0;
-    margin-bottom: 200px;
 
 }
 
@@ -140,8 +140,8 @@ button {
     margin: 10px 0;
     text-decoration: none;
     text-align: center;
-    font-size: 1.5em;
-    padding: 5px 50px;
+    font-size: 1.3em;
+    padding: 5px 4vw;
     border: 2px solid #D9D9D9;
     border-radius: 10px;
     color: black;
@@ -151,44 +151,36 @@ button {
     border: 2px solid #FB0004;
     color: #FB0004;
     background-color: rgba(251, 0, 4, 0.20);
-
-
 }
 
 /* navbar bot */
+.navbar .bot {
+    grid-area: navbar-bot;
+    display: flex;
+    justify-content: flex-start;
+
+}
 
 .navbar .bot .box {
-    display: grid;
-    grid-template-areas:
-        'mycart'
-        'price';
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 0.3fr;
+    box-sizing: border-box;
     background-color: #FB0004;
-    margin: 20px;
     border-radius: 10px;
-}
-
-.navbar .bot .box .mycart {
-    grid-area: mycart;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 20px;
+    flex-direction: column;
+    
+    margin: 1vw 0;
+    padding: 0 5vw;
+    
 }
 
-.navbar .bot .box .price {
-    grid-area: price;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    margin: 20px 20px;
-}
 
-.navbar .bot .box .price a,
-.mycart a {
-    color: #fff;
+.navbar .bot .box a, .totalcart {
+    color: #ffff;
     text-decoration: none;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.3em;
+    
 }
 
 /*--------------------main--------------------*/
@@ -199,24 +191,47 @@ button {
     overflow: hidden;
     overflow: scroll;
     overflow: auto;
-    height: 60vh;
 }
 
 .foodcontainer {
+    background-image: linear-gradient(to right, #000 50%, transparent 50%);
     background-size: 10px 1px;
     background-repeat: repeat-x;
     background-position: bottom;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
-        'menuimg menuinfo'
-        'menuimg menuinfo'
-        'menuimg menuinfo';
+        'menuimg menutitle'
+        'menuimg menudesc'
+        'menuimg menuprice';
 
     padding-bottom: 1.5vw;
     margin-bottom: 1.5vw;
+    height: fit-content;
+    max-width: 100%;
+
+}
+
+.menuimg {
+    grid-area: menuimg;
+    width: 15vw;
+    height: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.menuimg img {
+    display: block;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    align-items: center;
+    object-fit: cover;
+    border-radius: 6px;
 
 }
 
@@ -228,35 +243,56 @@ button {
     background-color: #FFCB00;
 }
 
-.menuimg img {
-    display: block;
-    margin: auto;
-    max-width: 100%;
-    max-height: 100%;
-    align-items: center;
-    object-fit: contain;
+.menutitle {
+    grid-area: menutitle;
 }
 
-.menuimg {
-    grid-area: menuimg;
-    width: 15vw;
+.menudesc {
+    grid-area: menudesc;
+    font-size: 1em;
+}
+
+.price {
+    grid-area: menuprice;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    flex-direction: row;
+
 }
 
-.menubackground img {
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
-    border-radius: 6px;
+.menuprice {
+    color: #FB0004;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-right: 10vw;
 }
 
-.menuinfo {
-    grid-area: menuinfo;
-    margin: 0;
+.input-group {
     display: flex;
-    justify-content: flex-start;
-    align-items: start;
+    align-items: center;
+
+}
+
+.input-group input {
+    color: #FB0004;
+    background-color: #FFCB50;
+    border-color: transparent;
+    text-align: center;
+    width: 9vw;
+
+}
+
+.lbtn {
+    color: #FB0004;
+    background-color: #FFCB50;
+    font-size: large;
+    border-radius: 5px 0 0 5px;
+    border-color: transparent;
+}
+
+.rbtn {
+    color: #FB0004;
+    background-color: #FFCB50;
+    font-size: large;
+    border-radius: 0 5px 5px 0;
+    border-color: transparent;
 }

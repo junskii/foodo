@@ -3,7 +3,7 @@ session_start();
 include 'koneksi.php';
 // Periksa apakah pengguna telah login
 if (!isset($_SESSION['login'])) {
-    header("Location: login.php");
+    header("Location: signin.php");
     exit;
 }
 
@@ -73,16 +73,8 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
             </div>
             <div class="bot">
                 <div class="box">
-                    <div class="mycart">
-                        <a href="">
-                            <p>mycart</p>
-                        </a>
-                        <a href="">
-                        </a>
-                    </div>
-                    <div class="price">
-                        <a href="">RP 13000</a>
-                    </div>
+                    <a href=""><p>mycart</p></a>
+                    <div class="totalcart">Rp.</div>
                 </div>
             </div>
         </div>
@@ -100,29 +92,40 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
                         <img src="<?= $row['Gambar']; ?>">
                     </div>
                 </div>
-
-                <div class="menuinfo">
-                    <div class="menutitle">
-                        <h4>
-                            <?= $row['NamaMenu']; ?>
-                        </h4>
-                    </div>
-                    <div class="menudesc">
-                        <?= $row['Deskripsi']; ?>
-                    </div>
-                    <div class="menuprice">Rp.
-                        <?= $row['Harga']; ?>
-                    </div>
-                    <div class="menuadd">Add</div>
+                <div class="menutitle">
+                    <h4>
+                        <?= $row['NamaMenu']; ?>
+                    </h4>
                 </div>
+                <div class="menudesc">
+                    <?= $row['Deskripsi']; ?>
+                </div>
+                <div class="price">
+                <div class="menuprice">Rp.<?= $row['Harga']; ?></div>
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button id="down" class="lbtn btn-default"
+                                onclick="down('<?= $row['MenuID']; ?>', '0')"><span
+                                    class="glyphicon glyphicon-minus"></span>-</button>
+                        </div>
+                        <input type="text" id="myNumber<?= $row['MenuID']; ?>" class="form-control input-number"
+                            value="0" />
+                        <div class="input-group-btn">
+                            <button id="up" class="rbtn btn-default" onclick="up('<?= $row['MenuID']; ?>', '10')"><span
+                                    class="glyphicon glyphicon-plus"></span>+</button>
 
+                        </div>
+                    </div>
+                </div>
             </div>
             <?php endwhile; ?>
+
 
 
         </div>
         <div class="footer"></div>
     </div>
+    <script src="js/incrementbutton.js"></script>
 </body>
 
 </html>

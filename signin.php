@@ -24,7 +24,7 @@ include 'koneksi.php';
 
         <div class="loginform">
             <h1>Login<span id="titik">.</span></h1>
-            <form action="loginproses.php" method="post">
+            <form action="signinproses.php" method="post">
                 <div class="text-field">
                     <label for="email">Email:
                         <br>
@@ -45,7 +45,7 @@ include 'koneksi.php';
                 <button id="loginbutton" name="submit" type="submit">Login</button>
             </form>
             <div class="signuparea">
-                <p class="daftarakun">Don't have an account yet?<a href="regist.php"> Click here!</a></p>
+                <p class="daftarakun">Don't have an account yet?<a href="signup.php"> Click here!</a></p>
             </div>
         </div>
         <!-- /*--------------------pictarea--------------------*/ -->

@@ -1,10 +1,14 @@
+<?
+session_start();
+include 'koneksi.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up | foodo</title>
 </head>
 
 <body>
@@ -13,7 +17,7 @@
         <img src="/image/Foodo.png" alt="">
     </header> -->
     <main>
-        <form method="post" action="registproses.php">
+        <form method="post" action="signupproses.php">
             <div class="text-field">
                 <label for="fname">First Name:
                     <br>
@@ -50,7 +54,7 @@
             </div>
             <br>
             
-            <input type="submit" name="submit" value="Daftar">
+            <button type="submit" name="submit" value="Daftar">Sign Up</button>
         </form>
     </main>
 </body>

@@ -20,6 +20,7 @@ if ($result) {
 }
 
 
+
 $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
 ?>
 
@@ -38,11 +39,11 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
         <!-----------------header----------------->
         <div class="item header">
             <div class="logo">
-                <img src="assets/logosidered.png" alt="logo">
+            <a href="dashboard.php"><img src="assets/logosidered.png" alt="logo"></a>
             </div>
             <div class="top-button">
                 <a href="#"><img src="assets/order.png"></a>
-                <a href="dashboard.html"><img src="assets/user.png"></a>
+                <a href="profile.php"><img src="assets/user.png"></a>
             </div>
 
         </div>
@@ -66,16 +67,15 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
         <!-----------------nav----------------->
         <div class="navbar">
             <div class="top">
-                <div class="box">
-                    <a href="#food">food</a>
-                    <a href="beverage">beverage</a>
-                </div>
+                <a class="food" href="#food">food</a>
+                <a class="beverage" href="beverage">beverage</a>
             </div>
             <div class="bot">
-                <div class="box">
-                    <a href=""><p>mycart</p></a>
-                    <div class="totalcart">Rp.</div>
-                </div>
+                <a class="mycart">
+                    <p>My cart</p>
+                </a>
+                <a class="totalcart" href="">Total: Rp.</a>
+                <div class="arrow"><a href="mycart.php"><img src="assets/arrow.png"></div></a>
             </div>
         </div>
 
@@ -101,7 +101,9 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
                     <?= $row['Deskripsi']; ?>
                 </div>
                 <div class="price">
-                <div class="menuprice">Rp.<?= $row['Harga']; ?></div>
+                    <div class="menuprice">Rp.
+                        <?= $row['Harga']; ?>
+                    </div>
                     <div class="input-group">
                         <div class="input-group-btn">
                             <button id="down" class="lbtn btn-default"
@@ -115,6 +117,9 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
                                     class="glyphicon glyphicon-plus"></span>+</button>
 
                         </div>
+                    </div>
+                    <div class="addtocartbox">
+                        <button id="addtocart" type="submit">Add</button>
                     </div>
                 </div>
             </div>

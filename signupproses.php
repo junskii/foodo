@@ -4,9 +4,10 @@ include 'koneksi.php';
 
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
-$email = $_POST['email'];
 $phonenumber = $_POST['phonenumber'];
-$password = $_POST['pwd'];
+$email = $_POST['email'];
+
+$password = $_POST['password'];
 
 // Buat salt secara acak
 $salt = bin2hex(random_bytes(32));

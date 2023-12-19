@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | foodo</title>
+    <link rel="stylesheet" href="style/profile.css">
+    <script src="js/incrementbutton.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-----------------header----------------->
+        <div class="item header">
+            <div class="logo">
+                <img src="assets/logosidered.png" alt="logo">
+            </div>
+            <div class="top-button">
+                <a href="#"><img src="assets/order.png"></a>
+                <a href="dashboard.html"><img src="assets/user.png"></a>
+            </div>
+
+        </div>
+
+        <!-----------------subheader----------------->
+        <div class="item subheader">
+            <div class="subheaderbox">
+                <div class="lsubheader">
+                    <h1>Bon appétit,</h1>
+                    <h1 class="fname">Jundi</h1>
+
+                </div>
+                <div class="rsubheader">
+                    <h4>Currently enjoying meal at</h4>
+                    <h4 class="kantinfti">Kantin Terpadu FTI UII</h4>
+                    <h4>Your favorite meals, now in the palm of your hand</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-----------------main----------------->
+        <div class="main">
+            <div class="linkpage">
+                <a href="dashboard.html">Home</a> / <a href="#">Profile</a>
+            </div>
+            <h1 class="Profile">Profile</h1>
+
+            <!-----------------formprofile----------------->
+            <form>
+                <div class="text-field">
+                    <label for="customername">First Name
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter your first name" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="email">Email
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter your new email" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="password">Password
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter your new password" required>
+                    </label>
+                </div>
+                <br><br>
+                <input type="submit" value="Save" id="editprofilebutton">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,12 @@
 <?
 session_start();
 include 'koneksi.php';
+
+$_SESSION['login'] = true;
+$_SESSION['user_id'] = $row['CustomerID'];
+$_SESSION['user_email'] = $row['Email']; // Menyimpan email ke dalam session
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

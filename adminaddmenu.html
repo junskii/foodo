@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddMenu | foodo</title>
+    <link rel="stylesheet" href="style/adminaddmenu.css">
+    <script src="js/incrementbutton.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-----------------header----------------->
+        <div class="item header">
+            <div class="logo">
+                <img src="assets/logosidered.png" alt="logo">
+            </div>
+            <div class="top-button">
+                <a href="#"><img src="assets/order.png"></a>
+                <a href="dashboard.html"><img src="assets/user.png"></a>
+            </div>
+
+        </div>
+        <!-----------------subheader----------------->
+        <div class="item subheader">
+            <div class="subheaderbox">
+                <div class="lsubheader">
+                    <h1>Hello, </h1>
+                    <h1 class="fname">Admin 1</h1>
+
+                </div>
+                <div class="rsubheader">
+                    <h4>Currently serving meal at</h4>
+                    <h4 class="kantinfti">Kantin Terpadu FTI UII</h4>
+                    <h4>Your hard work matters. Thank you!</h4>
+                </div>
+            </div>
+        </div>
+        <!-----------------nav----------------->
+        <div class="navbar">
+            <div class="top">
+                <div class="box">
+                    <a href="#food">Edit Menu</a>
+                    <a href="beverage">Add Menu</a>
+                </div>
+            </div>
+
+        </div>
+        <!-----------------main----------------->
+        <div class="main">
+            <h1 class="addmenu">Add Menu</h1>
+
+            <!-----------------formaddmenu----------------->
+            <form>
+                <div class="text-field">
+                    <label for="menuname">Menu Name
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter your menu name" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="description">Description
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter the menu description" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="price">Price
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter the menu price" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="picture">Picture
+                        <br>
+                        <input type="file" autocomplete="off" placeholder="Insert menu picture here" accept="image/*"
+                            required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="availability">Availability
+                        <br>
+                        <select id="dropdownavailabilty">
+                            <option value="valueyes">Yes</option>
+                            <option value="valueno">No</option>
+                        </select>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="category">Category
+                        <br>
+                        <select id="dropdowncategory">
+                            <option value="valuefood">Food</option>
+                            <option value="valuebeverages">Beverage</option>
+                        </select>
+                    </label>
+                </div>
+                <br><br>
+                <input type="submit" value="Add" id="addmenubutton">
+            </form>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

@@ -8,14 +8,14 @@ body {
 .container {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 5fr 1fr;
     grid-template-rows: repeat(5 1fr);
     grid-template-areas:
         'header header'
         'subheader subheader'
-        'nav main'
-        'nav main'
-        'nav main';
+        'orderdetails payment'
+        'orderdetails payment'
+        'orderdetails payment';
 
     width: 100%;
     height: 100vh;
@@ -42,7 +42,7 @@ body {
     flex-direction: row;
     align-items: center;
     width: max-content;
-    height: auto;
+    height: 1vw;
 }
 
 .header .top-button a {
@@ -105,111 +105,31 @@ button {
     border: none;
 }
 
-/*--------------------nav--------------------*/
-.navbar {
-    grid-area: nav;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr;
-    grid-template-areas:
-        'navbar-top'
-        'navbar-bot';
+/*--------------------orderdetails--------------------*/
+.navlink{
+    background-image: linear-gradient(to right, #000 50%, transparent 50%);
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    color: #fb0004;
+    padding-bottom: 1vw;
 
-    border-right: 2px solid #D9D9D9;
-    width: 15vw;
-    height: 100%;
 }
 
-.navbar .top {
-    grid-area: navbar-top;
-    display: flex;
-    flex-direction: column;
-    grid-template-rows: 1fr 1fr;
-    /* grid-template-areas: 
-        'food'
-        'beverage'; */
-    margin-top: 1vw;
-    padding: 0;
-    font-size: 1em;
-}
-
-.navbar .top .food {
-    /* grid-area: food; */
-    justify-content: flex-start;
-}
-
-.navbar .top .beverage {
-    /* grid-area: beverage; */
-}
-.navbar .top a {
-    color: black;
-    background-color: #fff;
-    text-decoration: none;
-    text-align: center;
-    font-size: 1.3em;
-    border: 2px solid #D9D9D9;
-    border-radius: 0.5vw;
-
-    height: 2vw;
-    padding-left: 1vw;
-    margin: 0 2vw 1vw 1vw;
-    border-radius: 0.5vw;
-    max-width: 10vw;}
-
-.navbar .top a:hover {
-    border: 2px solid #FB0004;
-    color: #FB0004;
-    background-color: rgba(251, 0, 4, 0.20);
-}
-
-/* navbar bot */
-.navbar .bot {
-    grid-area: navbar-bot;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-        'mycartarea mycartarea'
-        'totalcart arrowarea';
-    background-color: #FB0004;
-    color: #ffffff;
-    text-align: left;
-    align-items: center;
-    padding-left: 1vw;
-    margin: 0 2vw 1vw 1vw;
-    border-radius: 0.5vw;
-    max-width: 10vw;
-}
-
-.navbar .bot .mycart{
-    grid-area: mycartarea;
+.navlink a{
+    color: #fb0004;
     text-decoration: none;
 }
 
-
-.totalcart {
-    grid-area: totalcart;
-    align-items: center;
-}
-
-.arrow {
-    grid-area: arrowarea;
-    width: 2vw;
-    align-items: center;
-}
-
-.arrow img{
-    max-width: 100%;
-}
-
-/*--------------------main--------------------*/
-.main {
-    grid-area: main;
-    margin: 10px 10px 10px 30px;
-    overflow: visible;
-    overflow: hidden;
-    overflow: scroll;
-    overflow: auto;
+.orderlabel{
+    color: #000;
+    font-size: 2em;
+    font-weight: 400;
+    background-image: linear-gradient(to right, #000 50%, transparent 50%);
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding-bottom: 1vw;
 }
 
 .foodcontainer {
@@ -285,37 +205,12 @@ button {
     padding-right: 10vw;
 }
 
-.input-group {
-    display: flex;
-    align-items: center;
 
-}
-
-.input-group input {
-    color: #FB0004;
-    background-color: #FFCB50;
-    border-color: transparent;
-    text-align: center;
-    width: 9vw;
-
-}
-
-.lbtn {
-    color: #FB0004;
-    background-color: #FFCB50;
-    font-size: large;
-    border-radius: 5px 0 0 5px;
-    border-color: transparent;
-}
-
-.rbtn {
-    color: #FB0004;
-    background-color: #FFCB50;
-    font-size: large;
-    border-radius: 0 5px 5px 0;
-    border-color: transparent;
-}
-#addtocart{
-    padding: 1vw 5vw;
-    background-color: #FFCB50;
+/*--------------------payment--------------------*/
+.payment{
+    grid-area: payment;
+    background-image: linear-gradient(to bottom, #000 50%, transparent 50%);
+    background-size: 1px 10px;
+    background-repeat: repeat-y;
+    background-position: left;
 }

@@ -8,55 +8,75 @@ include 'koneksi.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | foodo</title>
+    <title>Signup | foodo</title>
+    <link rel="stylesheet" href="style/signuppage.css">
+    <link rel="icon" href="assets/logoonly.png" type="image/x-icon">
+
 </head>
 
 <body>
-    <!-- <header>
-        <img id="logo_atas" src="/image/foodo_logo.png" alt="logo">
-        <img src="/image/Foodo.png" alt="">
-    </header> -->
-    <main>
-        <form method="post" action="signupproses.php">
-            <div class="text-field">
-                <label for="fname">First Name:
-                    <br>
-                    <input type="text" id="fname" name="fname" autocomplete="on" placeholder="Your First Name" required>
-                </label>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="assets/logosidered.png" alt="logo">
             </div>
-            <br>
-            <div class="text-field">
-                <label for="lname">Last Name:
-                    <br>
-                    <input type="text" id="lname" name="lname" autocomplete="on" placeholder="Your First Name" required>
-                </label>
+        </div>
+        <!-- /*--------------------loginform--------------------*/ -->
+
+        <div class="loginform">
+            <h1>Sign Up<span id="titik">.</span></h1>
+            <form action="signupproses.php" method="post">
+                <div class="text-field">
+                    <label for="firstname">First Name:
+                        <br>
+                        <input type="text" id="firstname" name="fname" autocomplete="off" placeholder="Your First Name"
+                            required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="lastname">Last Name:
+                        <br>
+                        <input type="text" id="lastname" name="lname" autocomplete="off" placeholder="Your Last Name"
+                            required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="phonenumber">Phone Number:
+                        <br>
+                        <input type="text" id="phonenumber" name="phonenumber" autocomplete="off"
+                            placeholder="Your Phone Number" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="email">Email:
+                        <br>
+                        <input type="email" id="email" name="email" autocomplete="off" placeholder="Your Email"
+                            required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="password">Password:
+                        <br>
+                        <input id="password" type="password" name="password" placeholder="Your Password" title="Minimum 6 characters at 
+                                                        least 1 Alphabet and 1 Number"
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required>
+                    </label>
+                </div>
+                <br><br>
+                <input type="submit" value="Sign Up" id="signupbutton">
+            </form>
+        </div>
+        <!-- /*--------------------pictarea--------------------*/ -->
+        <div class="pict">
+            <div class="loginpic">
+                <img src="assets/loginpic.jpg">
             </div>
-            <br>
-            <div class="text-field">
-                <label for="email">Email:
-                    <br>
-                    <input type="email" id="email" name="email" autocomplete="off" placeholder="Your Email" required>
-                </label>
-            </div>
-            <br>
-            <div class="text-field">
-                <label for="tel">Phone Number:
-                    <input id="tel" type="tel" name="phonenumber" placeholder="Phone number">
-                </label>
-            </div>
-            <br>
-            <div class="text-field">
-                <label for="password">Password:
-                    <input id="password" type="password" name="pwd" placeholder="Your Password" title="Minimum 6 characters at 
-                                                    least 1 Alphabet and 1 Number"
-                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required>
-                </label>
-            </div>
-            <br>
-            
-            <button type="submit" name="submit" value="Daftar">Sign Up</button>
-        </form>
-    </main>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,49 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,800;1,100&display=swap');
-body {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 8fr;
+    grid-template-areas: 
+        'header pict'
+        'loginform pict';
     margin: 0;
     padding: 0;
 }
-header {
+/*--------------------header--------------------*/
+.header{
+    grid-area: header;
+    border-bottom: 0.2vw solid #d9d9d9;
+   height: 85%;
+}
+
+.header .logo{
+    width: 10vw;
+    padding: 0.5vw;
+}
+.header img{
+    max-width: 100%;
+}
+/*--------------------loginform--------------------*/
+.loginform{
+    grid-area: loginform;
     display: flex;
-    align-items: center;
-    color: white;
-    background-color:#FB0004 ;
+    flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
-    padding-left: 20px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-left: 3vw;
+}
+
+.loginform h1{
+    color: #FB0004;
+    font-size: 4em;
     font-weight: 800;
-    font-family: 'Montserrat', sans-serif;
-    border: none;
-
 }
-#logo_atas{
-    width: 10%;
-    padding-right:3%;
-}
-main {
-    padding-left: 10%;
-    padding-top: 20%;
-    color: #FB0004;
-    font-family: 'Montserrat', sans-serif;
-
-}
-#mie {
- top: 0%;
- right: 0%;
- position: absolute;
- z-index: -1
+#titik{
+    color: #FFCB00;
 }
 
-
-.text-field {
-    color: #FB0004;
-
-    
-}
 input {
     width: 80%;
     padding: 9px;
@@ -52,51 +56,60 @@ input {
     border-radius: 5px;
 }
 
-.button {
-    text-align: center;
-    
+.loginform h1{
+    justify-content: center;
+    align-items: center;
 }
-#login {
-    color: white;
+
+.text-field{
+    color: #FB0004;
+}
+
+#signupbutton{
+    color: #FFFFFF;
     background-color: #FB0004;
-    padding: 8px 142px;
-    padding-bottom: 5px;
-    margin-right: 40px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
-
-}
-.regis{
-    text-align: center;
-}
-
-p {
-    margin-right: 40px;
-    font-weight: bold;
-}
-#signup_btn{
-    background-color: #FFCB00;
-    color: white;
-    padding: 8px 76px;
-    padding-bottom: 5px;
-    margin-right: 40px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    border-radius: 5px;
-    border: none;
     text-decoration: none;
-}
-#nasigoreng{
-    bottom: 0%;
-    left:0% ;
-    position: absolute;
-    z-index: -1
+    font-size: 1em;
+    font-weight: 800;
+    padding: 0.5vw 5vw;
+    border-radius: 0.3vw;
+    border: transparent;
+    justify-items: center;
+    align-items: center;
 }
 
-
-/* Example of a media query for small screens */
-@media only screen and (min-width: 992px) {
+.daftarakun{
+    color: #FB0004;
+}
+#signupbtn{
+    color: #FFFFFF;
+    background-color: #FFCB00;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 800;
+    padding: 0.5vw 3vw;
+    border-radius: 0.3vw;
     
+}
+
+.signuparea{
+    align-items: center;
+    justify-content: center;
+}
+
+/*--------------------pictarea--------------------*/
+.pict {
+    grid-area: pict;
+    width: 100%;
+   
+}
+
+.loginpic {
+    height: 100vh;
+}
+
+.loginpic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

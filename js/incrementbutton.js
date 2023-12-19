@@ -1,24 +1,12 @@
-function up(menuID, max) {
-    var inputElement = document.getElementById("myNumber" + menuID);
-    inputElement.value = parseInt(inputElement.value) + 1;
-
-    // Update total harga
-    updateTotalPrice(menuID);
+function up(max) {
+    document.getElementById("myNumber").value = parseInt(document.getElementById("myNumber").value) + 1;
+    if (document.getElementById("myNumber").value >= parseInt(max)) {
+        document.getElementById("myNumber").value = max;
+    }
 }
-
-function down(menuID, min) {
-    var inputElement = document.getElementById("myNumber" + menuID);
-    inputElement.value = parseInt(inputElement.value) - 1;
-
-    // Update total harga
-    updateTotalPrice(menuID);
-}
-
-function updateTotalPrice(menuID) {
-    var inputElement = document.getElementById("myNumber" + menuID);
-    var priceElement = document.getElementById("totalPrice" + menuID);
-    var totalPrice = parseInt(inputElement.value); // Langsung ambil jumlah item
-
-    // Tampilkan total harga tanpa format khusus
-    priceElement.innerText = totalPrice;
+function down(min) {
+    document.getElementById("myNumber").value = parseInt(document.getElementById("myNumber").value) - 1;
+    if (document.getElementById("myNumber").value <= parseInt(min)) {
+        document.getElementById("myNumber").value = min;
+    }
 }

@@ -212,6 +212,15 @@ button {
     overflow: auto;
 }
 
+.searchbar{
+  width: 100%;
+  border-radius: 12vw;
+}
+
+.search{
+ margin-right: 7px;
+}
+
 .foodcontainer {
     background-image: linear-gradient(to right, #000 50%, transparent 50%);
     background-size: 10px 1px;
@@ -224,7 +233,8 @@ button {
     grid-template-areas:
         'menuimg menutitle'
         'menuimg menudesc'
-        'menuimg menuprice';
+        'menuimg menuprice'
+        'menuimg buttons';
 
     padding-bottom: 1.5vw;
     margin-bottom: 1.5vw;
@@ -282,25 +292,39 @@ button {
     color: #FB0004;
     font-size: 1.5em;
     font-weight: bold;
-    padding-right: 10vw;
+    padding-right: 40vw;
 }
 
 .input-group {
-    display: flex;
-    align-items: center;
+    display: grid;
+    align-content:right;
+    grid-area: menuprice;
 
 }
 
-.input-group input {
+#myNumber {
     color: #FB0004;
     background-color: #FFCB50;
     border-color: transparent;
     text-align: center;
-    width: 9vw;
-
+    width: 10vw;
+    padding: 0.2vw 0vw 0.2vw 0vw;
+    border-radius: 0.4vw;
 }
 
-.lbtn {
+#addtocart {
+    margin-top: 0.2vw;
+    color: #ffffff;
+    background-color: #FB0004;
+    border-color: transparent;
+    width: 10vw;
+    text-align: center;
+    border-radius: 0.4vw;
+    max-height: 2vw;
+    font-weight: 500;
+}
+
+/* .lbtn {
     color: #FB0004;
     background-color: #FFCB50;
     font-size: large;
@@ -314,8 +338,4 @@ button {
     font-size: large;
     border-radius: 0 5px 5px 0;
     border-color: transparent;
-}
-#addtocart{
-    padding: 1vw 5vw;
-    background-color: #FFCB50;
-}
+} */

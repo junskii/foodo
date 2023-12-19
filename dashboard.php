@@ -81,8 +81,8 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
 
         <!-----------------main----------------->
         <div class="main">
-            <div class="search">
-                <input type="text">
+        <div class="search">
+                <input class="searchbar" type="text">
             </div>
             <h1 class="food">Food</h1>
             <?php while ($row = mysqli_fetch_assoc($menuResult)): ?>
@@ -105,21 +105,16 @@ $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu");
                         <?= $row['Harga']; ?>
                     </div>
                     <div class="input-group">
-                        <div class="input-group-btn">
-                            <button id="down" class="lbtn btn-default"
-                                onclick="down('<?= $row['MenuID']; ?>', '0')"><span
+                        <!-- <div class="input-group-btn">
+                            <button id="down" class="lbtn btn-default" onclick=" down('0')"><span
                                     class="glyphicon glyphicon-minus"></span>-</button>
-                        </div>
-                        <input type="text" id="myNumber<?= $row['MenuID']; ?>" class="form-control input-number"
-                            value="0" />
-                        <div class="input-group-btn">
-                            <button id="up" class="rbtn btn-default" onclick="up('<?= $row['MenuID']; ?>', '10')"><span
+                        </div> -->
+                        <input type="text" id="myNumber" class="form-control input-number" value="1" />
+                        <input type="submit" id="addtocart" class="form-control input-number" value="Add to Cart">
+                        <!-- <div class="input-group-btn">
+                            <button id="up" class="rbtn btn-default" onclick="up('10')"><span
                                     class="glyphicon glyphicon-plus"></span>+</button>
-
-                        </div>
-                    </div>
-                    <div class="addtocartbox">
-                        <button id="addtocart" type="submit">Add</button>
+                        </div> -->
                     </div>
                 </div>
             </div>

@@ -1,3 +1,37 @@
+<?php
+session_start();
+include 'koneksi.php';
+
+// Periksa apakah pengguna telah login
+if (!isset($_SESSION['login'])) {
+    header("Location: signin.php");
+    exit;
+}
+
+// Fungsi untuk menghitung total cart
+function calculateTotalCart()
+{
+    $total = 0;
+
+    if (!empty($_SESSION['cart_item'])) {
+        foreach ($_SESSION['cart_item'] as $item) {
+            $total += (float) $item['price'] * (int) $item['quantity'];
+        }
+    }
+
+    return $total;
+}
+
+$userID = $_SESSION['user_id'];
+$result = mysqli_query($mysqli, "SELECT FirstName FROM Customers WHERE CustomerID = $userID");
+
+if ($result) {
+    $userData = mysqli_fetch_assoc($result);
+    $fname = $userData['FirstName'];
+} else {
+    $fname = "Guest";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,75 +71,43 @@
                 </div>
             </div>
         </div>
-        <!-----------------orderdetails----------------->
-        <div class="orderdetails">
+       <!-----------------orderdetails----------------->
+       <div class="orderdetails">
             <div class="navlink">
                 <a href="dashboard.php">Home /</a>
                 <a href="#"><strong>My Cart</strong></a>
             </div>
             <p class="orderlabel">Order Details</p>
-            <?php
-            session_start();
-            include 'koneksi.php';
+            
+            <!-- Menampilkan daftar item di keranjang -->
+            <div class="cart-items">
+            <h2>My Cart</h2>
+            <?php if (!empty($_SESSION['cart_item'])): ?>
+                <ul>
+                    <?php foreach ($_SESSION['cart_item'] as $item): ?>
+                        <li>
+                            <span><?php echo $item['name']; ?></span>
+                            <span>Quantity: <?php echo $item['quantity']; ?></span>
+                            <span>Price: Rp. <?php echo number_format($item['price'], 0, ',', '.'); ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>Your cart is empty.</p>
+            <?php endif; ?>
+        </div>
 
-            // Periksa apakah pengguna telah login
-            if (!isset($_SESSION['login'])) {
-                header("Location: signin.php");
-                exit;
-            }
-
-            // Ambil data pengguna dari database berdasarkan ID yang disimpan di sesi
-            $userID = $_SESSION['user_id'];
-            $result = mysqli_query($mysqli, "SELECT FirstName FROM Customers WHERE CustomerID = $userID");
-
-            if ($result) {
-                $userData = mysqli_fetch_assoc($result);
-                $fname = $userData['FirstName'];
-            } else {
-                // Handle error jika tidak dapat mengambil data pengguna
-                $fname = "Guest";
-            }
-
-            // Tampilkan item-item di keranjang
-           // Tampilkan item-item di keranjang
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $menuID => $item) {
-        $menuResult = mysqli_query($mysqli, "SELECT * FROM Menu WHERE MenuID = $menuID");
-
-        // Check if the query was successful and if it returned any rows
-        if ($menuResult && mysqli_num_rows($menuResult) > 0) {
-            $menuData = mysqli_fetch_assoc($menuResult);
-
-            echo '<div class="foodcontainer">';
-            echo '<div class="menuimg">';
-            echo '<div class="menubackground">';
-            echo '<img src="uploads/menu/' . $menuData['Gambar'] . '">';
-            echo '</div>';
-            echo '</div>';
-            echo '<div class="menutitle">';
-            echo '<h2>' . $menuData['NamaMenu'] . '</h2>';
-            echo '</div>';
-            echo '<div class="menudesc">' . $menuData['Deskripsi'] . '</div>';
-            echo '<div class="price">';
-            echo '<div class="menuprice">Rp.' . $menuData['Harga'] * $item['quantity'] . '</div>';
-            echo '</div>';
-            echo '</div>';
-        } else {
-            // Handle the case when menu data is not found
-            echo '<div class="foodcontainer">';
-            echo '<p>Menu with ID ' . $menuID . ' not found.</p>';
-            echo '</div>';
-        }
-    }
-}
-
-            ?>
+        <!-- Menampilkan total cart -->
+        <div class="total-cart">
+            <p>Total: Rp. <?php echo number_format(calculateTotalCart(), 0, ',', '.'); ?></p>
+        </div>
             
             <div class="footer"></div>
         </div>
 
+
         <!-----------------payment----------------->
-        <div class="payment">p
+        <div class="payment">payment
             
         </div>
 

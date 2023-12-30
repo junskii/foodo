@@ -8,7 +8,7 @@ body {
 .container {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 4fr 2fr;
     grid-template-rows: repeat(5 1fr);
     grid-template-areas:
         'header header'
@@ -29,7 +29,7 @@ body {
     justify-content: space-between;
     background-color: #ffffff;
     border-bottom: 0.2vw solid #d9d9d9;
-    padding: 0 0 0.5vw 0;
+    padding: 0 0 0vw 0;
     margin: 0;
 }
 
@@ -63,7 +63,7 @@ body {
     grid-area: subheader;
     border-bottom: 0.2vw solid #D9D9D9;
     margin-top: 0.8vw;
-    padding-bottom: 0.8vw;
+    padding-bottom: 0
 }
 
 .subheaderbox {
@@ -108,129 +108,22 @@ button {
 /*--------------------nav--------------------*/
 .navbar {
     grid-area: nav;
-    display: grid;
+    /* display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr;
+    grid-template-rows: 1fr 9fr;
     grid-template-areas:
         'navbar-top'
-        'navbar-bot';
+        'navbar-bot'; */
 
     border-right: 2px solid #D9D9D9;
-    width: 15vw;
+    width: 65vw;
     height: 100%;
+    
 }
 
-.navbar .top {
-    grid-area: navbar-top;
-    display: flex;
-    flex-direction: column;
-    grid-template-rows: 1fr 1fr;
-    /* grid-template-areas: 
-        'food'
-        'beverage'; */
-    margin-top: 1vw;
-    padding: 0;
-    font-size: 1em;
-}
-
-.navbar .top .food {
-    /* grid-area: food; */
-    justify-content:center;
-}
-
-.navbar .top .beverage {
-    /* grid-area: beverage; */
-}
-.navbar .top a {
-    color: black;
-    background-color: #fff;
+a{
     text-decoration: none;
-    text-align: center;
-    font-size: 1.3em;
-    border: 2px solid #D9D9D9;
-    border-radius: 0.5vw;
-
-    height: 2vw;
-    padding-left: 1vw;
-    margin: 0 2vw 1vw 1vw;
-    border-radius: 0.5vw;
-    max-width: 10vw;}
-
-.navbar .top a:hover {
-    border: 2px solid #FB0004;
-    color: #FB0004;
-    background-color: rgba(251, 0, 4, 0.20);
-}
-
-/* navbar bot */
-.navbar .bot {
-    grid-area: navbar-bot;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-        'mycartarea mycartarea'
-        'totalcart arrowarea';
-    background-color: #FB0004;
-    color: #ffffff;
-    text-align: left;
-    align-items: center;
-    padding-left: 1vw;
-    margin: 0 2vw 1vw 1vw;
-    border-radius: 0.5vw;
-    max-width: 10vw;
-}
-
-a .bot{
-    text-decoration: none;
-}
-/* .navbar .bot a{
-    color: #ffffff;
-    text-decoration: none;
-} */
-/* .mycart a{
-    grid-area: mycartarea;
-    color: #ffffff;
-}
-
-
-a .totalcart {
-    grid-area: totalcart;
-    align-items: center;
-    color: #ffffff;
-} */
-
-.arrow {
-    grid-area: arrowarea;
-    width: 2vw;
-    align-items: center;
-}
-
-.arrow img{
-    max-width: 100%;
-}
-
-/*--------------------main--------------------*/
-.main {
-    grid-area: main;
-    margin: 10px 10px 10px 30px;
-    overflow: visible;
-    overflow: hidden;
-    overflow: scroll;
-    overflow: auto;
-}
-
-.search{
-    text-align: center; /* Center the search bar */
-    margin-top: 20px;
-}
-
-.searchbar{
-padding: 10px;
-}
-
-.search-button{
- padding: 1vw;
+    color: #fb0004;
 }
 
 .foodcontainer {
@@ -245,8 +138,7 @@ padding: 10px;
     grid-template-areas:
         'menuimg menutitle'
         'menuimg menudesc'
-        'menuimg menuprice'
-        'menuimg buttons';
+        'menuimg menuprice';
 
     padding-bottom: 1.5vw;
     margin-bottom: 1.5vw;
@@ -304,50 +196,88 @@ padding: 10px;
     color: #FB0004;
     font-size: 1.5em;
     font-weight: bold;
-    padding-right: 40vw;
+    padding-right: 10vw;
 }
 
 .input-group {
-    display: grid;
-    align-content:right;
-    grid-area: menuprice;
-    
+    display: flex;
+    align-items:center;
 }
 
-#myNumber {
+.input-group input {
     color: #FB0004;
     background-color: #FFCB50;
     border-color: transparent;
     text-align: center;
-    width: 10vw;
-    padding: 0.2vw 0vw 0.2vw 0vw;
-    border-radius: 0.4vw;
+    width: 9vw;
+    border-radius: 5px;
 }
 
-#addtocart {
-    margin-top: 0.2vw;
+.navbar .box{
     color: #ffffff;
+    font-size: large;
     background-color: #FB0004;
     border-color: transparent;
-    width: 10vw;
     text-align: center;
-    border-radius: 0.4vw;
-    max-height: 2vw;
-    font-weight: 500;
+    width: 64vw;
+    padding: 2vw 0vw 2vw 0vw;
+    border-radius: 5px;
 }
 
-/* .lbtn {
+#code{
     color: #FB0004;
-    background-color: #FFCB50;
-    font-size: large;
-    border-radius: 5px 0 0 5px;
-    border-color: transparent;
+    margin-left: 20px;
+}
+/*--------------------main--------------------*/
+.main {
+    grid-area: main;
+    display: grid;
+    grid-template-rows: 1fr auto; /* 1fr for .details and auto for #paidbutton */
+    margin: 10px;
+    overflow: auto;
+    align-items: start; /* Align items at the start (top) of the container */
 }
 
-.rbtn {
+.details {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        'text button'
+        'text button'
+        'text button';
+}
+
+.text {
+    grid-area: text;
+    margin: 10px 35px 2px 10px;
+}
+
+.button {
+    grid-area: button;
+    margin: 10px 35px 2px 10px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+}
+
+input, select {
+    background-color: rgba(251, 0, 4, 0.20);
+    margin: 10px 0px 2px 0px;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid #FB0004;
+    border-radius: 10px;
     color: #FB0004;
-    background-color: #FFCB50;
-    font-size: large;
-    border-radius: 0 5px 5px 0;
-    border-color: transparent;
-} */
+    width: 100%;
+}
+
+#paidbutton {
+    color: white;
+    background-color: #FB0004;
+    padding: 15px 160px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    justify-self: center;
+    align-self: end; /* Align the button to the end (bottom) of its grid area */
+}

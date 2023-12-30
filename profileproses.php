@@ -8,25 +8,12 @@ if (isset($_POST['submit'])) {
     $first_name = $_POST['fname'];
     $last_name = $_POST['lname'];
     $email = $_POST['email'];
-    $phonenumber = $_POST['phonenumber'];
 
-    // Menggunakan prepared statement untuk melindungi dari SQL injection
-    $stmt = $mysqli->prepare("UPDATE Customers SET FirstName=?, LastName=?, Email=?, NomorTelepon=? WHERE CustomerID=?");
-    
-    // Bind parameter ke statement
-    $stmt->bind_param("ssssi", $first_name, $last_name, $email, $phonenumber, $_SESSION['user_id']);
-
-    // Eksekusi statement
-    if ($stmt->execute()) {
-        // Jika pembaruan berhasil, arahkan kembali ke halaman utama
-        header("Location: dashboard.php");
-        exit();
-    } else {
-        // Jika terjadi kesalahan, tampilkan pesan kesalahan
-        echo "Error updating record: " . $stmt->error;
-    }
-
-    // Tutup statement
-    $stmt->close();
+    // Menjalankan query UPDATE untuk memperbarui data karyawan
+    $result = mysqli_query($mysqli, "UPDATE Customers SET 
+     FirstName='$first_name', LastName='$last_name', Email='$email' WHERE CustomerID={$_SESSION['user_id']}");
+    // Mengarahkan kembali ke halaman utama setelah pembaruan berhasil
+    header("Location: dashboard.php");
+    exit();
 }
 ?>

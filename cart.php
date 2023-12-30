@@ -2,6 +2,7 @@
 session_start();
 include 'koneksi.php';
 
+// Check if quantity is posted
 if (isset($_POST['quantity'])) {
     $menuID = $_POST['menu_id'];
     $menuName = $_POST['menu_name'];
@@ -10,11 +11,10 @@ if (isset($_POST['quantity'])) {
 
     // Create an item array with product details and quantity
     $itemArray = array(
-        $menuID => array(
-            'name' => $menuName,
-            'price' => $menuPrice,
-            'quantity' => $quantity
-        )
+        'id' => $menuID,
+        'name' => $menuName,
+        'price' => $menuPrice,
+        'quantity' => $quantity
     );
 
     // Check if the cart is not empty
@@ -23,12 +23,12 @@ if (isset($_POST['quantity'])) {
         if (array_key_exists($menuID, $_SESSION["cart_item"])) {
             $_SESSION["cart_item"][$menuID]["quantity"] += $quantity;
         } else {
-            // If the product is not in the cart, merge the item array with the cart
-            $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
+            // If the product is not in the cart, add it
+            $_SESSION["cart_item"][$menuID] = $itemArray;
         }
     } else {
         // If the cart is empty, set the cart to the item array
-        $_SESSION["cart_item"] = $itemArray;
+        $_SESSION["cart_item"][$menuID] = $itemArray;
     }
 }
 

@@ -135,7 +135,7 @@ button {
 
 .navbar .top .food {
     /* grid-area: food; */
-    justify-content: flex-start;
+    justify-content:center;
 }
 
 .navbar .top .beverage {
@@ -181,16 +181,24 @@ button {
     max-width: 10vw;
 }
 
-.navbar .bot .mycart{
-    grid-area: mycartarea;
+a .bot{
     text-decoration: none;
 }
+/* .navbar .bot a{
+    color: #ffffff;
+    text-decoration: none;
+} */
+/* .mycart a{
+    grid-area: mycartarea;
+    color: #ffffff;
+}
 
 
-.totalcart {
+a .totalcart {
     grid-area: totalcart;
     align-items: center;
-}
+    color: #ffffff;
+} */
 
 .arrow {
     grid-area: arrowarea;
@@ -212,13 +220,17 @@ button {
     overflow: auto;
 }
 
-.searchbar{
-  width: 100%;
-  border-radius: 12vw;
+.search{
+    text-align: center; /* Center the search bar */
+    margin-top: 20px;
 }
 
-.search{
- margin-right: 7px;
+.searchbar{
+padding: 10px;
+}
+
+.search-button{
+ padding: 1vw;
 }
 
 .foodcontainer {
@@ -299,7 +311,7 @@ button {
     display: grid;
     align-content:right;
     grid-area: menuprice;
-
+    
 }
 
 #myNumber {

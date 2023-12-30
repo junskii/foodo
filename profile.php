@@ -19,7 +19,6 @@ $customer_data = mysqli_fetch_array($result);
 $first_name = $customer_data['FirstName'];
 $last_name = $customer_data['LastName'];
 $email = $customer_data['Email'];
-$phonenumber = $customer_data['NomorTelepon']
 ?>
 
 <!DOCTYPE html>
@@ -74,34 +73,27 @@ $phonenumber = $customer_data['NomorTelepon']
             <!-----------------formprofile----------------->
             <form method="post" action="profileproses.php">
                 <div class="text-field">
-                    <label for="firstname">First Name
+                    <label for="customername">First Name
                         <br>
-                        <input name="fname" type="text" autocomplete="off" placeholder="Enter your new name" value="<?php echo $first_name ?>" required>
+                        <input name="fname" type="text" autocomplete="off" value="<?php echo $first_name ?>" required>
                     </label>
                 </div>
                 <br>
                 <div class="text-field">
-                    <label for="last name">Last Name
+                    <label for="lname">Last Name
                         <br>
-                        <input name="lname" type="text" autocomplete="off" placeholder="Enter your new email" value="<?php echo $last_name ?>" required>
+                        <input name="lname"type="text" autocomplete="off" value="<?php echo $last_name ?>" required>
                     </label>
                 </div>
                 <br>
                 <div class="text-field">
                     <label for="email">Email
                         <br>
-                        <input name="email" type="text" autocomplete="off" placeholder="Enter your new password" value="<?php echo $email ?>" required>
-                    </label>
-                </div>
-                <br>
-                <div class="text-field">
-                    <label for="password">Password
-                        <br>
-                        <input name="phonenumber" type="text" autocomplete="off" placeholder="Enter your new password" value="<?php echo $phonenumber ?>"required>
+                        <input name="email" type="text" autocomplete="off" value="<?php echo $email ?>" required>
                     </label>
                 </div>
                 <br><br>
-                <input type="submit" value="Save" id="editprofilebutton">
+                <button name="submit" type="submit" id="editprofilebutton">Save</button>
             </form>
         </div>
     </div>

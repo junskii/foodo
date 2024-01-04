@@ -201,14 +201,23 @@ if (isset($_SESSION['user_id'])) {
                         <p>KANTIN FTI</p>
                     </div>
                 </div>
-                <div class="bot">
+                <!-- <div class="bot">
                     <div>
                         <input href="#"type="submit" value="I Have Paid the Bill" id="paidbutton">
                     </div>
+                </div> -->
+                <div class="bot">
+                    <a class="paidbutton" href="success.php">
+                        <p>I Have Paid The Bil</p>
+                    </a>
                 </div>
             </div>
         </div>
-
+        <!-- <div class="bot">
+                <a class="paidbutton" href="success.html">
+                    <p>I Have Paid The Bill</p>
+                </a>
+            </div> -->
         <script>
             function togglePaymentSections() {
                 var selectedOption = document.getElementById("payment-method").value;

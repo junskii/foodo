@@ -9,7 +9,6 @@ if (!isset($_SESSION['login'])) {
 }
 
 // Function to calculate total cart value
-// Function to calculate total cart value
 function calculateTotalCart()
 {
     $total = 0;
@@ -22,7 +21,6 @@ function calculateTotalCart()
 
     return $total;
 }
-
 
 // Fetch user data
 $fname = "Guest"; // Default value if user data retrieval fails
@@ -41,15 +39,49 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
+if (isset($_POST['submit-payment'])) {
+    // Insert data ke tabel Orders
+    $userID = $_SESSION['user_id'];
+    $orderDate = date("Y-m-d"); // Tanggal hari ini
+    $totalAmount = calculateTotalCart(); // Fungsi untuk menghitung total harga
 
+    // Ganti 1 dengan ID metode pembayaran yang dipilih
+    $paymentMethodID = 1;
+
+    $insertOrderQuery = "INSERT INTO Orders (CustomerID, TanggalPemesanan, TotalHarga, MetodeID) VALUES (?, ?, ?, ?)";
+    $stmtOrder = $mysqli->prepare($insertOrderQuery);
+    $stmtOrder->bind_param("isii", $userID, $orderDate, $totalAmount, $paymentMethodID);
+
+    if ($stmtOrder->execute()) {
+        // Ambil OrderID yang baru dibuat
+        $orderID = mysqli_insert_id($mysqli);
+
+        // Insert data ke tabel OrderDetails
+        foreach ($_SESSION['cart_item'] as $item) {
+            $menuID = $item['id'];
+            $quantity = $item['quantity'];
+
+            $insertOrderDetailQuery = "INSERT INTO OrderDetails (OrderID, MenuID, Jumlah) VALUES (?, ?, ?)";
+            $stmtOrderDetail = $mysqli->prepare($insertOrderDetailQuery);
+            $stmtOrderDetail->bind_param("iii", $orderID, $menuID, $quantity);
+            $stmtOrderDetail->execute();
+            $stmtOrderDetail->close();
+        }
+
+        // Setelah selesai, hapus data keranjang belanja
+        unset($_SESSION['cart_item']);
+
+        // Redirect atau tampilkan pesan sukses, dll.
+        header("Location: success.php");
+        exit;
+    } else {
+        // Handle error
+        echo "Error while processing payment.";
+    }
+
+    $stmtOrder->close();
+}
 ?>
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +107,7 @@ if (isset($_SESSION['user_id'])) {
                 <img src="assets/logosidered.png" alt="logo">
             </div>
             <div class="top-button">
-                <a href="#"><img src="assets/order.png"></a>
+                <!-- <a href="#"><img src="assets/order.png"></a> -->
                 <a href="profile.php"><img src="assets/user.png"></a>
             </div>
 
@@ -109,8 +141,8 @@ if (isset($_SESSION['user_id'])) {
             <div class="cart-items">
                 <h2>My Cart</h2>
                 <ul class="cart-list">
-                    <?php if (isset($_SESSION['cart_item'])) : ?>
-                        <?php foreach ($_SESSION['cart_item'] as $item) : ?>
+                    <?php if (isset($_SESSION['cart_item'])): ?>
+                        <?php foreach ($_SESSION['cart_item'] as $item): ?>
                             <?php
                             // Assuming $mysqli is your database connection
                             $itemId = $item['id'];
@@ -118,7 +150,7 @@ if (isset($_SESSION['user_id'])) {
 
                             if ($itemResult && mysqli_num_rows($itemResult) > 0) {
                                 $menuItem = mysqli_fetch_assoc($itemResult);
-                            ?>
+                                ?>
                                 <li class="cart-item">
                                     <div class="item-details">
                                         <h3 class="item-name">
@@ -135,12 +167,13 @@ if (isset($_SESSION['user_id'])) {
                                         <span class="item-price">Price: Rp.
                                             <?php echo number_format($item['price'], 0, ',', '.'); ?>
                                         </span>
-                                        <span class="remove-item"><a href="remove_item.php?id=<?php echo $item['id']; ?>">Remove</a></span>
+                                        <span class="remove-item"><a
+                                                href="remove_item.php?id=<?php echo $item['id']; ?>">Remove</a></span>
                                     </div>
                                 </li>
                             <?php } ?>
                         <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php else: ?>
                         <p class="empty-cart">Your cart is empty.</p>
                     <?php endif; ?>
                 </ul>
@@ -156,10 +189,10 @@ if (isset($_SESSION['user_id'])) {
             <div class="footer"></div>
         </div>
 
-        <div class="payment">
+        <form action="" method="post">
+            <!-- ... (informasi pembayaran seperti QR Code, bank transfer, dll.) -->
             <label for="payment-method">Payment Method:</label>
-            <select id="payment-method" class="payment-dropdown" onchange="togglePaymentSections()">
-                <option value="">Select Payment Method</option>
+            <select id="payment-method" class="payment-dropdown" name="payment-method">
                 <option value="qris">QRIS</option>
                 <option value="bank-transfer">Bank Transfer</option>
             </select>
@@ -171,9 +204,6 @@ if (isset($_SESSION['user_id'])) {
                         <img src="image/qrfoodo.png" id="qrcode">
                     </div>
                 </div>
-                    <div>
-                        <input href="#" type="submit" value="I Have Paid the Bill" id="paidbutton">
-                    </div>
             </div>
 
             <!-- bank page -->
@@ -190,7 +220,7 @@ if (isset($_SESSION['user_id'])) {
                         <p>12345678</p>
                         <p>1234567890123</p>
                         <p>1234567890</p>
-                        <p>1234567890</p>
+                        <p>1234567890<xap>
                         <p>1234567890</p>
                     </div>
                     <div class="nama-kantin">
@@ -201,45 +231,36 @@ if (isset($_SESSION['user_id'])) {
                         <p>KANTIN FTI</p>
                     </div>
                 </div>
-                <!-- <div class="bot">
-                    <div>
-                        <input href="#"type="submit" value="I Have Paid the Bill" id="paidbutton">
-                    </div>
-                </div> -->
-                <div class="bot">
-                    <a class="paidbutton" href="success.php">
-                        <p>I Have Paid The Bil</p>
-                    </a>
-                </div>
             </div>
-        </div>
-        <!-- <div class="bot">
-                <a class="paidbutton" href="success.html">
-                    <p>I Have Paid The Bill</p>
-                </a>
-            </div> -->
-        <script>
-            function togglePaymentSections() {
-                var selectedOption = document.getElementById("payment-method").value;
-                var qrisSection = document.querySelector(".qris");
-                var bankSection = document.querySelector(".bank");
 
-                // Hide both sections initially
-                qrisSection.classList.add("hidden");
-                bankSection.classList.add("hidden");
+            <!-- Tombol "I Have Paid the Bill" -->
+            <input type="submit" name="submit-payment" value="I Have Paid the Bill" id="paidbutton">
+        </form>
 
-                // Show/hide sections based on selected option
-                if (selectedOption === "qris") {
-                    qrisSection.classList.remove("hidden");
-                } else if (selectedOption === "bank-transfer") {
-                    bankSection.classList.remove("hidden");
-                }
+    </div>
+
+    <script>
+        function togglePaymentSections() {
+            var selectedOption = document.getElementById("payment-method").value;
+            var qrisSection = document.querySelector(".qris");
+            var bankSection = document.querySelector(".bank");
+
+            // Hide both sections initially
+            qrisSection.classList.add("hidden");
+            bankSection.classList.add("hidden");
+
+            // Show/hide sections based on selected option
+            if (selectedOption === "qris") {
+                qrisSection.classList.remove("hidden");
+            } else if (selectedOption === "bank-transfer") {
+                bankSection.classList.remove("hidden");
             }
-            // Initial hiding of both sections
-            document.addEventListener("DOMContentLoaded", function() {
-                togglePaymentSections();
-            });
-        </script>
+        }
+        // Initial hiding of both sections
+        document.addEventListener("DOMContentLoaded", function () {
+            togglePaymentSections();
+        });
+    </script>
     </div>
 </body>
 

@@ -27,8 +27,8 @@ $email = $customer_data['Email'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | foodo</title>
-    <link rel="stylesheet" href="style/profile.css">
+    <title>History | foodo</title>
+    <link rel="stylesheet" href="style/history.css">
     <script src="js/incrementbutton.js"></script>
 </head>
 
@@ -40,7 +40,7 @@ $email = $customer_data['Email'];
             <a href="dashboard.php"><img src="assets/logosidered.png" alt="logo"></a>
             </div>
             <div class="top-button">
-                <!-- <a href="#"><img src="assets/order.png"></a> -->
+                <a href="#"><img src="assets/order.png"></a>
                 <a href="profile.php"><img src="assets/user.png"></a>
             </div>
 
@@ -66,35 +66,33 @@ $email = $customer_data['Email'];
         <!-----------------main----------------->
         <div class="main">
             <div class="linkpage">
-                <a href="dashboard.php">Home</a> / <a href="#"><strong>Profile</strong></a>
+                <a href="dashboard.php">Home</a> / <a href="#"><strong>History</strong></a>
             </div>
-            <h1 class="Profile">Profile</h1>
+            <h1 class="Profile">History</h1>
 
-            <!-----------------formprofile----------------->
-            <form method="post" action="profileproses.php">
-                <div class="text-field">
-                    <label for="customername">First Name
-                        <br>
-                        <input name="fname" type="text" autocomplete="off" value="<?php echo $first_name ?>" required>
-                    </label>
-                </div>
-                <br>
-                <div class="text-field">
-                    <label for="lname">Last Name
-                        <br>
-                        <input name="lname"type="text" autocomplete="off" value="<?php echo $last_name ?>" required>
-                    </label>
-                </div>
-                <br>
-                <div class="text-field">
-                    <label for="email">Email
-                        <br>
-                        <input name="email" type="text" autocomplete="off" value="<?php echo $email ?>" required>
-                    </label>
-                </div>
-                <br><br>
-                <button name="submit" type="submit" id="editprofilebutton">Save</button>
-            </form>
+            <table>
+        <tr>
+            <th>Date</th>
+            <th>Menu</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>John Doe</td>
+            <td>25</td>
+            <td>USA</td>
+        </tr>
+        <tr>
+            <td>Jane Smith</td>
+            <td>30</td>
+            <td>Canada</td>
+        </tr>
+        <tr>
+            <td>Mohammed Ali</td>
+            <td>22</td>
+            <td>India</td>
+        </tr>
+    </table>
+
         </div>
     </div>
 </body>

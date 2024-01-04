@@ -9,7 +9,6 @@ if (!isset($_SESSION['login'])) {
 }
 
 // Function to calculate total cart value
-// Function to calculate total cart value
 function calculateTotalCart()
 {
     $total = 0;
@@ -22,7 +21,6 @@ function calculateTotalCart()
 
     return $total;
 }
-
 
 // Fetch user data
 $fname = "Guest"; // Default value if user data retrieval fails
@@ -41,68 +39,49 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
-
-?>
-
-
-
-
-
-
-
-
-<?php
-session_start();
-include 'koneksi.php';
-
-// Check if the user is logged in
-if (!isset($_SESSION['login'])) {
-    header("Location: signin.php");
-    exit;
-}
-
-// Function to calculate total cart value
-// Function to calculate total cart value
-function calculateTotalCart()
-{
-    $total = 0;
-
-    if (!empty($_SESSION['cart_item'])) {
-        foreach ($_SESSION['cart_item'] as $item) {
-            $total += (float) $item['price'] * (int) $item['quantity'];
-        }
-    }
-
-    return $total;
-}
-
-
-// Fetch user data
-$fname = "Guest"; // Default value if user data retrieval fails
-if (isset($_SESSION['user_id'])) {
+if (isset($_POST['submit-payment'])) {
+    // Insert data ke tabel Orders
     $userID = $_SESSION['user_id'];
-    $query = "SELECT FirstName FROM Customers WHERE CustomerID = ?";
+    $orderDate = date("Y-m-d"); // Tanggal hari ini
+    $totalAmount = calculateTotalCart(); // Fungsi untuk menghitung total harga
 
-    // Using prepared statement to prevent SQL injection
-    $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("i", $userID);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Ganti 1 dengan ID metode pembayaran yang dipilih
+    $paymentMethodID = 1;
 
-    if ($result && $userData = $result->fetch_assoc()) {
-        $fname = $userData['FirstName'];
+    $insertOrderQuery = "INSERT INTO Orders (CustomerID, TanggalPemesanan, TotalHarga, MetodeID) VALUES (?, ?, ?, ?)";
+    $stmtOrder = $mysqli->prepare($insertOrderQuery);
+    $stmtOrder->bind_param("isii", $userID, $orderDate, $totalAmount, $paymentMethodID);
+
+    if ($stmtOrder->execute()) {
+        // Ambil OrderID yang baru dibuat
+        $orderID = mysqli_insert_id($mysqli);
+
+        // Insert data ke tabel OrderDetails
+        foreach ($_SESSION['cart_item'] as $item) {
+            $menuID = $item['id'];
+            $quantity = $item['quantity'];
+
+            $insertOrderDetailQuery = "INSERT INTO OrderDetails (OrderID, MenuID, Jumlah) VALUES (?, ?, ?)";
+            $stmtOrderDetail = $mysqli->prepare($insertOrderDetailQuery);
+            $stmtOrderDetail->bind_param("iii", $orderID, $menuID, $quantity);
+            $stmtOrderDetail->execute();
+            $stmtOrderDetail->close();
+        }
+
+        // Setelah selesai, hapus data keranjang belanja
+        unset($_SESSION['cart_item']);
+
+        // Redirect atau tampilkan pesan sukses, dll.
+        header("Location: success.php");
+        exit;
+    } else {
+        // Handle error
+        echo "Error while processing payment.";
     }
+
+    $stmtOrder->close();
 }
-
-
 ?>
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,11 +97,6 @@ if (isset($_SESSION['user_id'])) {
             display: none;
         }
     </style>
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -133,8 +107,7 @@ if (isset($_SESSION['user_id'])) {
                 <img src="assets/logosidered.png" alt="logo">
             </div>
             <div class="top-button">
-                <a href="#"><img src="assets/order.png"></a>
-                <a href="profile.php"><img src="assets/user.png"></a>
+                <!-- <a href="#"><img src="assets/order.png"></a> -->
                 <a href="profile.php"><img src="assets/user.png"></a>
             </div>
 
@@ -144,9 +117,6 @@ if (isset($_SESSION['user_id'])) {
             <div class="subheaderbox">
                 <div class="lsubheader">
                     <h1>Bon appétit,</h1>
-                    <h1 class="fname">
-                        <?php echo $fname ?>
-                    </h1>
                     <h1 class="fname">
                         <?php echo $fname ?>
                     </h1>
@@ -171,19 +141,8 @@ if (isset($_SESSION['user_id'])) {
             <div class="cart-items">
                 <h2>My Cart</h2>
                 <ul class="cart-list">
-                    <?php if (isset($_SESSION['cart_item'])) : ?>
-                        <?php foreach ($_SESSION['cart_item'] as $item) : ?>
-                            <?php
-                            // Assuming $mysqli is your database connection
-                            $itemId = $item['id'];
-                            $itemResult = mysqli_query($mysqli, "SELECT * FROM Menu WHERE MenuID = $itemId");
-
-            <!-- Menampilkan daftar item di keranjang -->
-            <div class="cart-items">
-                <h2>My Cart</h2>
-                <ul class="cart-list">
-                    <?php if (isset($_SESSION['cart_item'])) : ?>
-                        <?php foreach ($_SESSION['cart_item'] as $item) : ?>
+                    <?php if (isset($_SESSION['cart_item'])): ?>
+                        <?php foreach ($_SESSION['cart_item'] as $item): ?>
                             <?php
                             // Assuming $mysqli is your database connection
                             $itemId = $item['id'];
@@ -191,7 +150,7 @@ if (isset($_SESSION['user_id'])) {
 
                             if ($itemResult && mysqli_num_rows($itemResult) > 0) {
                                 $menuItem = mysqli_fetch_assoc($itemResult);
-                            ?>
+                                ?>
                                 <li class="cart-item">
                                     <div class="item-details">
                                         <h3 class="item-name">
@@ -208,49 +167,13 @@ if (isset($_SESSION['user_id'])) {
                                         <span class="item-price">Price: Rp.
                                             <?php echo number_format($item['price'], 0, ',', '.'); ?>
                                         </span>
-                                        <span class="remove-item"><a href="remove_item.php?id=<?php echo $item['id']; ?>">Remove</a></span>
+                                        <span class="remove-item"><a
+                                                href="remove_item.php?id=<?php echo $item['id']; ?>">Remove</a></span>
                                     </div>
                                 </li>
                             <?php } ?>
                         <?php endforeach; ?>
-                    <?php else : ?>
-                        <p class="empty-cart">Your cart is empty.</p>
-                    <?php endif; ?>
-                </ul>
-            </div>
-
-            <!-- Menampilkan total cart -->
-            <div class="total-cart">
-                <p>Total: Rp.
-                    <?php echo number_format(calculateTotalCart(), 0, ',', '.'); ?>
-                </p>
-            </div>
-
-                            if ($itemResult && mysqli_num_rows($itemResult) > 0) {
-                                $menuItem = mysqli_fetch_assoc($itemResult);
-                            ?>
-                                <li class="cart-item">
-                                    <div class="item-details">
-                                        <h3 class="item-name">
-                                            <?php echo $menuItem['NamaMenu']; ?>
-                                        </h3>
-                                        <p class="item-description">
-                                            <?php echo $menuItem['Deskripsi']; ?>
-                                        </p>
-                                    </div>
-                                    <div class="item-controls">
-                                        <span class="item-quantity">Quantity:
-                                            <?php echo $item['quantity']; ?>
-                                        </span>
-                                        <span class="item-price">Price: Rp.
-                                            <?php echo number_format($item['price'], 0, ',', '.'); ?>
-                                        </span>
-                                        <span class="remove-item"><a href="remove_item.php?id=<?php echo $item['id']; ?>">Remove</a></span>
-                                    </div>
-                                </li>
-                            <?php } ?>
-                        <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php else: ?>
                         <p class="empty-cart">Your cart is empty.</p>
                     <?php endif; ?>
                 </ul>
@@ -266,10 +189,10 @@ if (isset($_SESSION['user_id'])) {
             <div class="footer"></div>
         </div>
 
-        <div class="payment">
+        <form action="" method="post">
+            <!-- ... (informasi pembayaran seperti QR Code, bank transfer, dll.) -->
             <label for="payment-method">Payment Method:</label>
-            <select id="payment-method" class="payment-dropdown" onchange="togglePaymentSections()">
-                <option value="">Select Payment Method</option>
+            <select id="payment-method" class="payment-dropdown" name="payment-method">
                 <option value="qris">QRIS</option>
                 <option value="bank-transfer">Bank Transfer</option>
             </select>
@@ -281,9 +204,6 @@ if (isset($_SESSION['user_id'])) {
                         <img src="image/qrfoodo.png" id="qrcode">
                     </div>
                 </div>
-                    <div>
-                        <input href="#" type="submit" value="I Have Paid the Bill" id="paidbutton">
-                    </div>
             </div>
 
             <!-- bank page -->
@@ -311,41 +231,36 @@ if (isset($_SESSION['user_id'])) {
                         <p>KANTIN FTI</p>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <a href="success.php" class="paidbutton"><p>I Have Paid the Bill</p></a>
-                    </div>
-                </div>
-                <!-- <div class="bot">
-                    <a class="paidbutton" href="success.php">
-                        <p>I Have Paid The Bill</p>
-                    </a>
-                </div> -->
             </div>
-        </div>
 
-        <script>
-            function togglePaymentSections() {
-                var selectedOption = document.getElementById("payment-method").value;
-                var qrisSection = document.querySelector(".qris");
-                var bankSection = document.querySelector(".bank");
+            <!-- Tombol "I Have Paid the Bill" -->
+            <input type="submit" name="submit-payment" value="I Have Paid the Bill" id="paidbutton">
+        </form>
 
-                // Hide both sections initially
-                qrisSection.classList.add("hidden");
-                bankSection.classList.add("hidden");
+    </div>
 
-                // Show/hide sections based on selected option
-                if (selectedOption === "qris") {
-                    qrisSection.classList.remove("hidden");
-                } else if (selectedOption === "bank-transfer") {
-                    bankSection.classList.remove("hidden");
-                }
+    <script>
+        function togglePaymentSections() {
+            var selectedOption = document.getElementById("payment-method").value;
+            var qrisSection = document.querySelector(".qris");
+            var bankSection = document.querySelector(".bank");
+
+            // Hide both sections initially
+            qrisSection.classList.add("hidden");
+            bankSection.classList.add("hidden");
+
+            // Show/hide sections based on selected option
+            if (selectedOption === "qris") {
+                qrisSection.classList.remove("hidden");
+            } else if (selectedOption === "bank-transfer") {
+                bankSection.classList.remove("hidden");
             }
-            // Initial hiding of both sections
-            document.addEventListener("DOMContentLoaded", function() {
-                togglePaymentSections();
-            });
-        </script>
+        }
+        // Initial hiding of both sections
+        document.addEventListener("DOMContentLoaded", function () {
+            togglePaymentSections();
+        });
+    </script>
     </div>
 </body>
 

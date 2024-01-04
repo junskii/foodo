@@ -5,6 +5,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+input{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .container {
     width: 100%;
     display: grid;
@@ -29,12 +33,12 @@ body {
     justify-content: space-between;
     background-color: #ffffff;
     border-bottom: 0.2vw solid #d9d9d9;
-    padding: 0 0 0.5vw 0;
-    margin: 0;
+    padding: 0.5vw 0 1vw 0;
 }
 
 .header .logo {
     width: 10vw;
+    margin-left: 1vw;
 }
 
 .header .top-button {
@@ -49,6 +53,10 @@ body {
     padding-left: 0.5vw;
     justify-content: space-around;
     align-items: stretch;
+}
+
+.header .top-button img {
+max-width: 2vw;
 }
 
 .header img {
@@ -146,15 +154,17 @@ button {
     background-color: #fff;
     text-decoration: none;
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.2em;
     border: 2px solid #D9D9D9;
     border-radius: 0.5vw;
 
-    height: 2vw;
-    padding-left: 1vw;
+    height: 1.8vw;
+    padding-top: 0.2vw;
+    width: 100%;
     margin: 0 2vw 1vw 1vw;
     border-radius: 0.5vw;
-    max-width: 10vw;}
+    max-width: 13vw;
+}
 
 .navbar .top a:hover {
     border: 2px solid #FB0004;
@@ -166,48 +176,41 @@ button {
 .navbar .bot {
     grid-area: navbar-bot;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
         'mycartarea mycartarea'
         'totalcart arrowarea';
     background-color: #FB0004;
     color: #ffffff;
-    text-align: left;
-    align-items: center;
-    padding-left: 1vw;
-    margin: 0 2vw 1vw 1vw;
+    margin: 0 2vw 0vw 1vw;
     border-radius: 0.5vw;
-    max-width: 10vw;
+    padding: 0 1vw;
+    width: 100%;
+    max-width: 11vw;
+    text-decoration: none;
 }
 
-a .bot{
-    text-decoration: none;
-}
-/* .navbar .bot a{
-    color: #ffffff;
-    text-decoration: none;
-} */
-/* .mycart a{
+.mycart{
     grid-area: mycartarea;
-    color: #ffffff;
+    font-weight: bold;
 }
-
-
-a .totalcart {
+.totalcart{
     grid-area: totalcart;
-    align-items: center;
-    color: #ffffff;
-} */
-
-.arrow {
-    grid-area: arrowarea;
-    width: 2vw;
-    align-items: center;
 }
-
+.arrow{
+    grid-area: arrowarea;
+    align-items: center;
+    width: 2vw;
+}
 .arrow img{
     max-width: 100%;
+}
+
+a:-webkit-any-link {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /*--------------------main--------------------*/
@@ -220,17 +223,24 @@ a .totalcart {
     overflow: auto;
 }
 
-.search{
-    text-align: center; /* Center the search bar */
-    margin-top: 20px;
-}
-
 .searchbar{
-padding: 10px;
+margin-top: 0.4vw;
+padding: 0vw 1vw;
+width: 70vw;
+height: 2vw;
+text-align:start;
+border: 2px solid #D9D9D9;
+border-radius: 0.5vw;
 }
-
+ 
 .search-button{
- padding: 1vw;
+ padding: 0.5vw 1vw;
+ background-color:#FB0004;
+ color: #ffffff;
+ border:#FB0004;
+ border-radius: 5px;
+ margin-left: 1vw;
+ 
 }
 
 .foodcontainer {

@@ -7,6 +7,16 @@ if (!isset($_SESSION['login'])) {
     header("Location: signin.php");
     exit;
 }
+
+$userID = $_SESSION['user_id'];
+$result = mysqli_query($mysqli, "SELECT FirstName FROM Customers WHERE CustomerID = $userID");
+
+if ($result) {
+    $userData = mysqli_fetch_assoc($result);
+    $fname = $userData['FirstName'];
+} else {
+    $fname = "Guest";
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +43,7 @@ if (!isset($_SESSION['login'])) {
                 <img src="assets/logosidered.png" alt="logo">
             </div>
             <div class="top-button">
-                <a href="#"><img src="assets/order.png"></a>
+                <!-- <a href="#"><img src="assets/order.png"></a> -->
                 <a href="profile.php"><img src="assets/user.png"></a>
             </div>
 
@@ -62,13 +72,11 @@ if (!isset($_SESSION['login'])) {
                 <a href="mycart.php">My Cart /</a>
                 <a href="#"><strong>Complete</strong></a>
             </div>
-
-        <!---------------centeritem------------------->
-        <div class="itemtengah">
-            <img src="assets/logoonly.png" id="logotengahh">
-            <p>Complete your payment by scanning the QR Code provided</p>
-        </div>
-    </div>   
+            <div class="itemtengah">
+                <img src="assets/logoonly.png" id="logotengahh">
+                <p>Payment Successful. Please wait for your order to be served patiently.</p>
+            </div>
+        </div>   
 </body>
 
 </html>

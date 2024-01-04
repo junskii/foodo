@@ -60,7 +60,7 @@ if (isset($_POST['search'])) {
                 <a href="dashboard.php"><img src="assets/logosidered.png" alt="logo"></a>
             </div>
             <div class="top-button">
-                <a href="#"><img src="assets/order.png"></a>
+                <!-- <a href="#"><img src="assets/order.png"></a> -->
                 <a href="profile.php"><img src="assets/user.png"></a>
             </div>
         </div>
@@ -85,15 +85,15 @@ if (isset($_POST['search'])) {
         <!-- Navbar -->
         <div class="navbar">
             <div class="top">
-                <a class="food" href="#food">food</a>
-                <a class="beverage" href="beverage">beverage</a>
+                <a class="food" href="#food">Food</a>
+                <a class="beverage" href="beverage">Beverage</a>
             </div>
             <div class="bot">
                 <a class="mycart" href="mycart.php">
                     <p>My Cart</p>
                 </a>
                 <a class="totalcart" href="mycart.php">
-                    Total: Rp. <?= number_format(calculateTotalCart(), 0, ',', '.'); ?>
+                    Total : <br>Rp <?= number_format(calculateTotalCart(), 0, ',', '.'); ?>
                 </a>
                 <div class="arrow"><a href="mycart.php"><img src="assets/arrow.png"></div></a>
             </div>
@@ -103,7 +103,7 @@ if (isset($_POST['search'])) {
         <div class="main">
             <div class="search">
                 <form action="" method="post">
-                    <input class="searchbar" type="text" name="search" placeholder="Search food...">
+                    <input class="searchbar" type="text" name="search" placeholder="Search your favorite meal">
                     <input type="submit" class="search-button" value="Search">
                 </form>
             </div>
@@ -129,7 +129,7 @@ if (isset($_POST['search'])) {
                             <?= $row['Deskripsi']; ?>
                         </div>
                         <div class="price">
-                            <div class="menuprice">Rp. <?= $row['Harga']; ?></div>
+                            <div class="menuprice">Rp <?= $row['Harga']; ?></div>
                             <div class="input-group">
                                 <input type="text" name="quantity" class="quantity" value="1" id="myNumber"/>
                                 <input type="submit" class="form-control input-number" value="Add to Cart" id="addtocart"/>

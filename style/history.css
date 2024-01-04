@@ -4,21 +4,26 @@
 body {
     font-family: 'Montserrat', sans-serif;
 }
+input{
+    font-family: 'Montserrat', sans-serif;
+}
 
 .container {
     width: 100%;
     display: grid;
-    grid-template-rows: 1fr 1fr 5fr;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(5 1fr);
     grid-template-areas:
-        'header'
-        'subheader'
-        'orderdetails'
-        'orderdetails'
-        'orderdetails';
+        'header header'
+        'subheader subheader'
+        'main main'
+        'main main'
+        'main main';
 
     width: 100%;
     height: 100vh;
 }
+
 
 .header {
     grid-area: header;
@@ -58,6 +63,7 @@ max-width: 2vw;
     max-width: 100%;
     height: auto;
 }
+
 /*--------------------subheader--------------------*/
 .subheader {
     /* position: -webkit-sticky; 
@@ -107,30 +113,35 @@ button {
     border: none;
 }
 
-/*--------------------orderdetails--------------------*/
-.orderdetails{
-    grid-area: orderdetails;
-}
-.navlink{
-    color: #fb0004;
-    padding-bottom: 1vw;
 
+/*--------------------main--------------------*/
+.main {
+    grid-area: main;
+    margin: 10px 10px 10px 30px;
+    overflow: visible;
+    overflow: hidden;
+    overflow: scroll;
+    overflow: auto;
+    justify-items: center;
 }
 
-.navlink a{
-    color: #fb0004;
+a{
     text-decoration: none;
+    color: #FB0004;
 }
 
-.itemtengah {
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* Center text horizontally */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-#logotengahh{
-    width: 4vw;
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
 }

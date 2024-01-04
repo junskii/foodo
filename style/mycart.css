@@ -5,6 +5,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+input{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .container {
     width: 100%;
     display: grid;
@@ -29,12 +33,12 @@ body {
     justify-content: space-between;
     background-color: #ffffff;
     border-bottom: 0.2vw solid #d9d9d9;
-    padding: 0 0 0.5vw 0;
-    margin: 0;
+    padding: 0.5vw 0 1vw 0;
 }
 
 .header .logo {
     width: 10vw;
+    margin-left: 1vw;
 }
 
 .header .top-button {
@@ -42,13 +46,17 @@ body {
     flex-direction: row;
     align-items: center;
     width: max-content;
-    height: 1vw;
+    height: auto;
 }
 
 .header .top-button a {
     padding-left: 0.5vw;
     justify-content: space-around;
     align-items: stretch;
+}
+
+.header .top-button img {
+max-width: 2vw;
 }
 
 .header img {
@@ -107,13 +115,8 @@ button {
 
 /*--------------------orderdetails--------------------*/
 .navlink{
-    background-image: linear-gradient(to right, #000 50%, transparent 50%);
-    background-size: 10px 1px;
-    background-repeat: repeat-x;
-    background-position: bottom;
     color: #fb0004;
-    padding-bottom: 1vw;
-
+    margin-top: 0.5vw;
 }
 
 .navlink a{
@@ -130,6 +133,7 @@ button {
     background-repeat: repeat-x;
     background-position: bottom;
     padding-bottom: 1vw;
+    margin-top: 1vw;
 }
 
 .foodcontainer {
@@ -222,20 +226,10 @@ button {
 }
 
 .cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    padding-bottom: 2vw;
     border-bottom: 1px solid #ddd;
-}
-
-.item-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.item-name {
-    margin: 0;
 }
 
 .item-description {
@@ -245,18 +239,20 @@ button {
 .item-controls {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
+    align-items: left;
 }
 
-.item-quantity,
+.item-quantity{
+    padding: 2vw 2vw 0 2vw;
+}
 .item-price {
-    margin-bottom: 5px;
+    padding: 1vw 2vw 1vw 2vw;
 }
 
 .remove-item a {
     color: #a00;
     text-decoration: none;
+    padding: 2vw;
 }
 
 .remove-item a:hover {
@@ -266,6 +262,11 @@ button {
 .empty-cart {
     color: #666;
     margin: 0;
+}
+
+.total-cart{
+    font-weight:bold;
+    color: #FB0004;
 }
 
 /*--------------------payment--------------------*/
@@ -380,13 +381,13 @@ button {
     justify-content: center;
 }
 
-.paidbutton{
+#paidbutton{
     color: white !important;
     font-size: medium;
     background-color: #FB0004 !important;
-    padding: 15px 150px 15px;
+    padding: 1vw 6vw;
     font-size: 16px;
     border-radius: 5px;
     border: none;
-    text-align: center;
+    /* text-align: center; */
 }

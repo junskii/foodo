@@ -51,6 +51,59 @@ if (isset($_SESSION['user_id'])) {
 
 
 
+<?php
+session_start();
+include 'koneksi.php';
+
+// Check if the user is logged in
+if (!isset($_SESSION['login'])) {
+    header("Location: signin.php");
+    exit;
+}
+
+// Function to calculate total cart value
+// Function to calculate total cart value
+function calculateTotalCart()
+{
+    $total = 0;
+
+    if (!empty($_SESSION['cart_item'])) {
+        foreach ($_SESSION['cart_item'] as $item) {
+            $total += (float) $item['price'] * (int) $item['quantity'];
+        }
+    }
+
+    return $total;
+}
+
+
+// Fetch user data
+$fname = "Guest"; // Default value if user data retrieval fails
+if (isset($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
+    $query = "SELECT FirstName FROM Customers WHERE CustomerID = ?";
+
+    // Using prepared statement to prevent SQL injection
+    $stmt = $mysqli->prepare($query);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $userData = $result->fetch_assoc()) {
+        $fname = $userData['FirstName'];
+    }
+}
+
+
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,6 +113,11 @@ if (isset($_SESSION['user_id'])) {
     <title>Dashboard | foodo</title>
     <link rel="stylesheet" href="style/mycart.css">
     <script src="js/incrementbutton.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
     <style>
         .hidden {
             display: none;
@@ -77,6 +135,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="top-button">
                 <a href="#"><img src="assets/order.png"></a>
                 <a href="profile.php"><img src="assets/user.png"></a>
+                <a href="profile.php"><img src="assets/user.png"></a>
             </div>
 
         </div>
@@ -85,6 +144,9 @@ if (isset($_SESSION['user_id'])) {
             <div class="subheaderbox">
                 <div class="lsubheader">
                     <h1>Bon appétit,</h1>
+                    <h1 class="fname">
+                        <?php echo $fname ?>
+                    </h1>
                     <h1 class="fname">
                         <?php echo $fname ?>
                     </h1>
@@ -115,6 +177,54 @@ if (isset($_SESSION['user_id'])) {
                             // Assuming $mysqli is your database connection
                             $itemId = $item['id'];
                             $itemResult = mysqli_query($mysqli, "SELECT * FROM Menu WHERE MenuID = $itemId");
+
+            <!-- Menampilkan daftar item di keranjang -->
+            <div class="cart-items">
+                <h2>My Cart</h2>
+                <ul class="cart-list">
+                    <?php if (isset($_SESSION['cart_item'])) : ?>
+                        <?php foreach ($_SESSION['cart_item'] as $item) : ?>
+                            <?php
+                            // Assuming $mysqli is your database connection
+                            $itemId = $item['id'];
+                            $itemResult = mysqli_query($mysqli, "SELECT * FROM Menu WHERE MenuID = $itemId");
+
+                            if ($itemResult && mysqli_num_rows($itemResult) > 0) {
+                                $menuItem = mysqli_fetch_assoc($itemResult);
+                            ?>
+                                <li class="cart-item">
+                                    <div class="item-details">
+                                        <h3 class="item-name">
+                                            <?php echo $menuItem['NamaMenu']; ?>
+                                        </h3>
+                                        <p class="item-description">
+                                            <?php echo $menuItem['Deskripsi']; ?>
+                                        </p>
+                                    </div>
+                                    <div class="item-controls">
+                                        <span class="item-quantity">Quantity:
+                                            <?php echo $item['quantity']; ?>
+                                        </span>
+                                        <span class="item-price">Price: Rp.
+                                            <?php echo number_format($item['price'], 0, ',', '.'); ?>
+                                        </span>
+                                        <span class="remove-item"><a href="remove_item.php?id=<?php echo $item['id']; ?>">Remove</a></span>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <p class="empty-cart">Your cart is empty.</p>
+                    <?php endif; ?>
+                </ul>
+            </div>
+
+            <!-- Menampilkan total cart -->
+            <div class="total-cart">
+                <p>Total: Rp.
+                    <?php echo number_format(calculateTotalCart(), 0, ',', '.'); ?>
+                </p>
+            </div>
 
                             if ($itemResult && mysqli_num_rows($itemResult) > 0) {
                                 $menuItem = mysqli_fetch_assoc($itemResult);

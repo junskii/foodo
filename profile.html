@@ -46,18 +46,25 @@
             <h1 class="Profile">Profile</h1>
 
             <!-----------------formprofile----------------->
-            <form>
+            <form method="post" action="profileproses.php">
                 <div class="text-field">
-                    <label for="customername">First Name
+                    <label for="firstname">First Name
                         <br>
-                        <input type="text" autocomplete="off" placeholder="Enter your first name" required>
+                        <input name="fname" type="text" autocomplete="off" placeholder="Enter your new name" required>
+                    </label>
+                </div>
+                <br>
+                <div class="text-field">
+                    <label for="last name">Last Name
+                        <br>
+                        <input type="text" autocomplete="off" placeholder="Enter your new email" required>
                     </label>
                 </div>
                 <br>
                 <div class="text-field">
                     <label for="email">Email
                         <br>
-                        <input type="text" autocomplete="off" placeholder="Enter your new email" required>
+                        <input type="text" autocomplete="off" placeholder="Enter your new password" required>
                     </label>
                 </div>
                 <br>

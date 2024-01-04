@@ -380,11 +380,13 @@ button {
     justify-content: center;
 }
 
-#paidbutton{
-    color: white;
-    background-color: #FB0004;
+.paidbutton{
+    color: white !important;
+    font-size: medium;
+    background-color: #FB0004 !important;
     padding: 15px 150px 15px;
     font-size: 16px;
     border-radius: 5px;
     border: none;
+    text-align: center;
 }

@@ -201,11 +201,16 @@ if (isset($_SESSION['user_id'])) {
                         <p>KANTIN FTI</p>
                     </div>
                 </div>
-                <div class="bot">
+                <div>
                     <div>
-                        <input href="#"type="submit" value="I Have Paid the Bill" id="paidbutton">
+                        <a href="success.php" class="paidbutton"><p>I Have Paid the Bill</p></a>
                     </div>
                 </div>
+                <!-- <div class="bot">
+                    <a class="paidbutton" href="success.php">
+                        <p>I Have Paid The Bill</p>
+                    </a>
+                </div> -->
             </div>
         </div>
 

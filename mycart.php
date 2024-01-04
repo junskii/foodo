@@ -220,7 +220,7 @@ if (isset($_POST['submit-payment'])) {
                         <p>12345678</p>
                         <p>1234567890123</p>
                         <p>1234567890</p>
-                        <p>1234567890</p>
+                        <p>1234567890<xap>
                         <p>1234567890</p>
                     </div>
                     <div class="nama-kantin">

@@ -207,10 +207,10 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                 </div> -->
                 <div class="bot">
-                <a class="paidbutton" href="success.php">
-                    <p>I Have Paid The Bil</p>
-                </a>
-            </div>
+                    <a class="paidbutton" href="success.php">
+                        <p>I Have Paid The Bil</p>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- <div class="bot">
